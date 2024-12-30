@@ -327,11 +327,20 @@ public class EntityListener implements Listener {
         if(noTeleportEntities.get(entity.getUniqueId()) != null)
             return false;
 
-        if(plugin.getAllowMobs() == false && entity instanceof Mob)
+        if(plugin.getAllowMobs() == false && entity instanceof Mob) {
+            player.sendMessage(ChatColor.RED + "This server does not allow the teleportation of mobs.");
             return false;
+        }
 
-        if(plugin.getAllowItems() == false && entity instanceof Item)
+        if(plugin.getAllowItems() == false && entity instanceof Item) {
+            player.sendMessage(ChatColor.RED + "This server does not allow the teleportation of items.");
             return false;
+        }
+
+        if(plugin.getallowMinecarts() == false && entity instanceof Minecart) {
+            player.sendMessage(ChatColor.RED + "This server does not allow the teleportation of minecarts.");
+            return false;
+        }
 
         if(entity instanceof Player){
             Player player = (Player)entity;
